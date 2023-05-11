@@ -23,6 +23,17 @@ app.get('/news',(req,res)=>{
     )
 })
 
+app.post('/news/create', function (req, res, next) {
+    connection.query(
+      'INSERT INTO news(header, body, wid) VALUES (?, ?, ?)',
+      [req.body.header, req.body.body, req.body.wid],
+      function(err, results) {
+        res.json(results);
+      }
+    );
+  })
+
+
 app.get('/writer',(req,res)=>{
     connection.query(
         'SELECT * FROM writer',
