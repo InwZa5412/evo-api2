@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     res.send('Yo!')
 })
 
-app.get('/news',(req,res)=>{
+app.get('/1',(req,res)=>{
     connection.query(
         'SELECT * FROM news',
         function(err ,results, fields){
