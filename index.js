@@ -13,22 +13,20 @@ app.get('/', (req, res) => {
     res.send('Yo!')
 })
 
-app.get('/1',(req,res)=>{
+app.get('/news',(req,res)=>{
     connection.query(
         'SELECT * FROM news',
         function(err ,results, fields){
-            console.log(results)
             res.send(results)
 
         }
     )
 })
 
-app.get('/2',(req,res)=>{
+app.get('/writer',(req,res)=>{
     connection.query(
-        'SELECT * FROM write',
+        'SELECT * FROM writer',
         function(err ,results, fields){
-            console.log(results)
             res.send(results)
 
         }
