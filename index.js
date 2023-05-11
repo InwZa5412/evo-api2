@@ -39,7 +39,7 @@ app.post('/news/create', function (req, res, next) {
       'DELETE FROM news WHERE nid = ?',
       [req.body.nid],
       function(err, results) {
-        res.json(results);
+        res.send(results)
       }
     );
   })
