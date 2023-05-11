@@ -29,7 +29,7 @@ app.post('/news/create', function (req, res, next) {
       'INSERT INTO news(header, body, wid) VALUES (?, ?, ?)',
       [req.body.header, req.body.body, req.body.wid],
       function(err, results) {
-        res.json(results);
+        res.send(results);
       }
     );
   })
