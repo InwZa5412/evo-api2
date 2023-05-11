@@ -23,6 +23,16 @@ app.get('/1',(req,res)=>{
         }
     )
 
+    app.get('/2',(req,res)=>{
+        connection.query(
+            'SELECT * FROM write',
+            function(err ,results, fields){
+                console.log(results)
+                res.send(results)
+    
+            }
+        )
+
 })
 
 app.listen(process.env.PORT || 3000)
