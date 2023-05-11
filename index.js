@@ -33,6 +33,15 @@ app.post('/news/create', function (req, res, next) {
     );
   })
 
+  app.delete('/news/detele', function (req, res, next) {
+    connection.query(
+      'DELETE FROM news WHERE nid = ?',
+      [req.body.nid],
+      function(err, results) {
+        res.json(results);
+      }
+    );
+  })
 
 app.get('/writer',(req,res)=>{
     connection.query(
