@@ -38,8 +38,8 @@ app.get('/news/:sport', (req, res) => {
 
 app.post('/news/create', function (req, res, next) {
     connection.query(
-      'INSERT INTO news(header, body,pic, wid) VALUES (?, ?, ?,?)',
-      [req.body.header, req.body.body, req.body.pic,req.body.wid],
+      'INSERT INTO news(header, body,pic, wid,type) VALUES (?, ?, ?,?,?)',
+      [req.body.header, req.body.body, req.body.pic,req.body.wid,req.body.type],
       function(err, results) {
         res.send(results);
       }
