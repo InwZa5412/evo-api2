@@ -24,6 +24,18 @@ app.get('/news',(req,res)=>{
     )
 })
 
+app.get('/news/:sport', (req, res) => {
+  const sport = req.params.sport;
+  connection.query(
+    'SELECT * FROM news WHERE type = ?',
+    [sport],
+    function(err, results, fields) {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
 app.post('/news/create', function (req, res, next) {
     connection.query(
       'INSERT INTO news(header, body,pic, wid) VALUES (?, ?, ?,?)',
