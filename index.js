@@ -36,6 +36,18 @@ app.get('/news/:sport', (req, res) => {
   );
 });
 
+app.get('/news/:game', (req, res) => {
+  const sport = req.params.game;
+  connection.query(
+    'SELECT * FROM news WHERE type = ?',
+    [game],
+    function(err, results, fields) {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
 app.post('/news/create', function (req, res, next) {
     connection.query(
       'INSERT INTO news(header, body,pic, wid,type) VALUES (?, ?, ?,?,?)',
