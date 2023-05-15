@@ -24,18 +24,6 @@ app.get('/news',(req,res)=>{
     )
 })
 
-app.get('/news/:nid', (req, res) => {
-  const nid = req.params.nid;
-  connection.query(
-    'SELECT * FROM news WHERE nid = ?',
-    [nid],
-    function(err, results, fields) {
-      if (err) throw err;
-      res.send(results);
-    }
-  );
-});
-
 app.get('/news/:sport', (req, res) => {
   const sport = req.params.sport;
   connection.query(
