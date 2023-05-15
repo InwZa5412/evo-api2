@@ -104,5 +104,16 @@ app.post('/users', function(request, response) {
     response.end();
   }
 });
+app.put('/news/update', function (req, res, next) {
+  const nid = req.params.nid;
+  const { header, body, pic, type } = req.body;
+  connection.query(
+    'UPDATE news SET header = ?, body = ?, pic = ?,  type = ? WHERE nid = ?',
+    [header, body, pic, type, nid],
+    function(err, results) {
+      res.send(results);
+    }
+  );
+});
 
 app.listen(process.env.PORT || 3000)
