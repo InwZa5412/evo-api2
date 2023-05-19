@@ -104,14 +104,19 @@ app.post('/users', function(request, response) {
     response.end();
   }
 });
-app.put('/news/update', function (req, res, next) {
+app.put('/news/update/:nid', function (req, res, next) {
   const nid = req.params.nid;
   const { header, body, pic, type } = req.body;
   connection.query(
     'UPDATE news SET header = ?, body = ?, pic = ?,  type = ? WHERE nid = ?',
     [header, body, pic, type, nid],
     function(err, results) {
-      res.send(results);
+      if (err) {
+        console.error(err);
+        res.status(500).send('An error occurred while updating the news.');
+      } else {
+        res.send(results);
+      }
     }
   );
 });
