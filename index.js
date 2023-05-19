@@ -104,21 +104,22 @@ app.post('/users', function(request, response) {
     response.end();
   }
 });
-app.put('/news/update/:nid', function (req, res, next) {
-  const nid = req.params.nid;
+app.put('/news/update/:nid', (req, res) => {
+  const { nid } = req.params;
   const { header, body, pic, type } = req.body;
-  connection.query(
-    'UPDATE news SET header = ?, body = ?, pic = ?,  type = ? WHERE nid = ?',
-    [header, body, pic, type, nid],
-    function(err, results) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('An error occurred while updating the news.');
-      } else {
-        res.send(results);
-      }
+
+  const sql = "UPDATE news SET header = ?, body = ?, pic = ?, type = ? WHERE nid = ?";
+  const values = [header, body, pic, type, nid];
+
+  connection.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("เกิดข้อผิดพลาดในการอัปเดตข่าว:", error);
+      res.status(500).send("เกิดข้อผิดพลาดในการอัปเดตข่าว");
+    } else {
+      console.log("อัปเดตข่าวเรียบร้อยแล้ว");
+      res.send("อัปเดตข่าวเรียบร้อยแล้ว");
     }
-  );
+  });
 });
 
 app.listen(process.env.PORT || 3000)
